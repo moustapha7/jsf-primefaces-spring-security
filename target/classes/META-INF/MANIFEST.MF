@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: jsf-primefaces-spring-security
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: moust
+Implementation-Vendor-Id: com.codenotfound
+Build-Jdk: 1.8.0_191
+Implementation-URL: https://codenotfound.com/jsf-primefaces-spring-sec
+ urity-example.html
+Created-By: Maven Integration for Eclipse
+
