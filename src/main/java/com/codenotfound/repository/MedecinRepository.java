@@ -7,6 +7,8 @@ import com.codenotfound.domaine.Medecin;
 
 public interface MedecinRepository extends JpaRepository<Medecin, Long>
 {
+
+	Medecin findById(int id);
 	
 
 }

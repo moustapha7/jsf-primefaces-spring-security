@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Keur Massar Hostpital</title>
@@ -131,13 +132,96 @@
 			<a>Gestion des Consultations</a>
 		</div>
 
-		<aside id="colorlib-hero">
-		<div class="flexslider">
-			
-		</div>
-		</aside>
-
 		
+		
+		<div class="col-md-6">
+				<div class="col-md-6">
+					<li class="active"><h:link value="Nouveau Dossier Medical"
+						outcome="/view/consultation/addConsultation" class="btn btn-primary"/></li>
+				</div>
+		</div>
+
+		<div class="row" align="right" style="margin-left:20px">
+			<h:dataTable value="#{consultationController.consultations}" var="consultation"
+				styleClass="table table-striped table-hover">
+				<h:column>
+					<f:facet name="header">N°</f:facet>
+					#{consultation.id}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Num dossier</f:facet>
+					#{consultation.numero}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Patients</f:facet>
+					#{consultation.patient.prenom} #{consultation.patient.nom}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Medecins</f:facet>
+					#{consultation.medecin.prenom} #{consultation.medecin.nom}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nom Maladie</f:facet>
+					#{consultation.nom}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Details</f:facet>
+					#{consultation.details}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					#{consultation.date}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Medicament 1</f:facet>
+					#{consultation.ordonnance.nom}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Medicament 2</f:facet>
+					#{consultation.ordonnance2.nom}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Medicament 3</f:facet>
+					#{consultation.ordonnance3.nom}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Medicament 4</f:facet>
+					#{consultation.ordonnance4.nom}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:form>
+					
+						<h:commandButton style="margin: 5px"
+							styleClass="btn btn-success btn-sm"
+							action="#{consultationController.detailsConsultation(consultation)}"
+							value="Details" />
+						<h:commandButton style="margin: 5px"
+							styleClass="btn btn-warning btn-sm"
+							action="#{consultationController.editConsultation(consultation)}" value="Editer" />
+						<h:commandButton style="margin: 5px"
+							styleClass="btn btn-danger btn-sm"
+							action="#{consultationController.deleteConsultation(consultation)}"
+							value="Supprimer" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+
+		</div>
+
+
+
 		
 		
 

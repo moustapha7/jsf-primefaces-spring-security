@@ -111,7 +111,7 @@
 												<li>
 													<h:form onsubmit="this.action='#{request.contextPath}/logout';"
 													    class="logout-form">
-													    <p:commandLink value="Deconnexion" ajax="false" />
+													    <p:commandLink value="Deconnexion" ajax="true" />
 													  </h:form>  
 												</li>
 											</ul>									
@@ -141,8 +141,8 @@
 				</div>
 		</div>
 
-		<div class="row" align="right">
-			<h:dataTable value="#{utilisateurController.appUsers}" var="appUser"
+		<div class="row" align="right" style="margin-left:30px">
+			<h:dataTable value="#{utilisateurController.appUsers}" var="appUser" 
 				styleClass="table table-striped table-hover">
 				<h:column>
 					<f:facet name="header">N°</f:facet>
@@ -172,6 +172,11 @@
 				<h:column>
 					<f:facet name="header">Username</f:facet>
 					#{appUser.username}
+				</h:column>
+				
+				 <h:column>
+					<f:facet name="header">Roles</f:facet>
+					#{appUser.roles}
 				</h:column>
 				
 				<h:column>

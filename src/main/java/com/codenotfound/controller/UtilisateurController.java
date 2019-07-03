@@ -1,9 +1,14 @@
 package com.codenotfound.controller;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.codenotfound.domaine.AppRole;
@@ -13,8 +18,9 @@ import com.codenotfound.repository.UserRepository;
 
 
 
-
-public class UtilisateurController {
+@Named
+@SessionScoped
+public class UtilisateurController implements Serializable {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -27,15 +33,21 @@ public class UtilisateurController {
 	private List<AppUser> appUsers;
 	private String message ;
 	
+	private List<AppRole> appRoles;
+	
+	
 	public UtilisateurController ()
 	{
-		initUtilisateur();
+		//initUtilisateur();
 		
 	}
 
+	@PostConstruct
 	private void initUtilisateur() {
 		appUser = new AppUser();
 		appUser.getRoles();
+		getAppUsers();
+		getAppRoles();
 		
 		
 	}
@@ -50,6 +62,9 @@ public class UtilisateurController {
 
 	public List<AppUser> getAppUsers() {
 		appUsers = userRepository.findAll();
+		
+		 if(appUsers == null) appUsers = new ArrayList<>();
+		
 		return appUsers;
 	}
 
@@ -65,6 +80,21 @@ public class UtilisateurController {
 		this.message = message;
 	}
 	
+	
+	/*public List<AppRole> getAppRoles() {
+		
+		appRoles = roleRepository.findAll();
+		
+		 if(appRoles == null) appRoles = new ArrayList<>();
+		return appRoles;
+	}
+
+	public void setAppRoles(List<AppRole> appRoles) {
+		this.appRoles = appRoles;
+	}*/
+	
+	
+
 	
 	
 	
@@ -82,6 +112,14 @@ public class UtilisateurController {
     }
 	
 	
+	public List<AppRole> getAppRoles() {
+		return appRoles;
+	}
+
+	public void setAppRoles(List<AppRole> appRoles) {
+		this.appRoles = appRoles;
+	}
+
 	public String editUser(AppUser appUser){
         try {
             this.appUser = appUser ;
@@ -120,7 +158,7 @@ public class UtilisateurController {
             AppRole ap = (AppRole) roleRepository.findAll();
          
            
-            appUser.setRoles((List<AppRole>) ap);
+           // appUser.setRoles((List<AppRole>) ap);
             userRepository.save(appUser);
             
      

@@ -30,10 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/javax.faces.resource/**","/resources/**")
         .permitAll().anyRequest().authenticated();
     // login
-    http.formLogin().loginPage("/login.xhtml").permitAll()
-        .failureUrl("/login.xhtml?error=true");
+    http.formLogin().loginPage("/login2.xhtml").permitAll()
+        .failureUrl("/login2.xhtml?error=true");
     // logout
-    http.logout().logoutSuccessUrl("/login.xhtml");
+    http.logout().logoutSuccessUrl("/login2.xhtml");
     // not needed as JSF 2.2 is implicitly protected against CSRF
     http.csrf().disable();
   }

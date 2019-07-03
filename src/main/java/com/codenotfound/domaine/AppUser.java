@@ -12,26 +12,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 @Entity
-public class AppUser implements Serializable{
-@Id @GeneratedValue(strategy=GenerationType.AUTO)
-private Long id;
-private String username;
-private String password ;
-private String email;
-private Boolean actived;
-private String nom;
-private String prenom;
-private String tel;
-	@ManyToMany(cascade={ CascadeType.ALL },fetch = FetchType.EAGER)
-	private List <AppRole> roles = new ArrayList<AppRole>();
-public AppUser(Long id, String username, String password) {
-	super();
-	this.id = id;
-	this.username = username;
-	this.password = password;
-}
+public class AppUser implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String username;
+	private String password;
+	private String email;
+	private Boolean actived;
+	private String nom;
+	private String prenom;
+	private String tel;
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	private List<AppRole> roles = new ArrayList<AppRole>();
+
+	public AppUser(Long id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
 
 	public AppUser() {
 	}

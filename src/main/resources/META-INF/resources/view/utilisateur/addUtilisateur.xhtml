@@ -2,11 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Keur Massar Hostpital</title>
-	
+
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,48 +15,60 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 
-  <!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
 	<meta name="twitter:title" content="" />
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"/>
-	
-	
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/animate.css" />
-	
-	
+	<link
+		href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+		rel="stylesheet" />
+
+
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/animate.css" />
+
+
 	<!-- Animate.css -->
-	
+
 	<!-- Icomoon Icon Fonts-->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/icomoon.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/icomoon.css" />
 	<!-- Bootstrap  -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.css" />
 	<!-- Magnific Popup -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/magnific-popup.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/magnific-popup.css" />
 	<!-- Owl Carousel  -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/owl.carousel.min.css" />
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/owl.theme.default.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/owl.carousel.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/owl.theme.default.min.css" />
 	<!-- Flexslider  -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/flexslider.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/flexslider.css" />
 	<!-- Flaticons  -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/fonts/flaticon/font/flaticon.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/fonts/flaticon/font/flaticon.css" />
 	<!-- Theme style  -->
-	 <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" />
 
 	<!-- Modernizr JS -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/modernizr-2.6.2.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	
+
 </h:head>
 
 <h:body>
@@ -72,10 +85,11 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div id="colorlib-logo">
-										<a href="index.html"><i class="flaticon-stethoscope"></i>KM <span>Hostpital</span></a>
+										<a href="index.html"><i class="flaticon-stethoscope"></i>KM
+											<span>Hostpital</span></a>
 									</div>
 								</div>
-								
+
 								<div class="col-md-3">
 									<div class="loc">
 										<span class="icon"><i class="icon-location"></i></span>
@@ -90,60 +104,123 @@
 					</div>
 				</div>
 			</div>
-			<div class="menu-wrap">
-				<p:tabMenu>
-				    <p:menuitem value="Accueil" outcome="index">
-				       
-				    </p:menuitem>
-				    <p:menuitem value="Utilisateur" outcome="/view/utilisateur/listUtilisateur">
-				        <f:param name="i" value="0" />
-				    </p:menuitem>
-				    <p:menuitem value="Medecin" outcome="/view/medecin/listMedecin">
-				        <f:param name="i" value="0" />
-				    </p:menuitem>
-				   <p:menuitem value="Patient" outcome="/view/patient/listPatient">
-				        <f:param name="i" value="0" />
-				    </p:menuitem>
-				    <p:menuitem value="Ordonnance" outcome="/view/patient/listPatient">
-				        <f:param name="i" value="0" />
-				    </p:menuitem>
-				    <p:menuitem value="Consultation" outcome="/view/patient/listPatient">
-				        <f:param name="i" value="0" />
-				    </p:menuitem>   
-				</p:tabMenu>
-			</div>
 		</div>
 		</nav>
 
-		<aside id="colorlib-hero">
-		<div class="flexslider">
-			
-		</div>
-		</aside>
+		<h2 class="h3 text-left">Ajout Utilisateur</h2>
+		<div class="container">
 
-		
-		
-		
+
+			<h:form styleClass="form">
+				<div class="form-group row">
+					<label for="prenom" class="col-sm-2 col-form-label">Prenom</label>
+					<div class="col-sm-10">
+						<h:inputText id="prenom" required="true"
+							value="#{utilisateurController.appUser.prenom}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nom" class="col-sm-2 col-form-label">Nom</label>
+					<div class="col-sm-10">
+						<h:inputText id="nom" required="true"
+							value="#{utilisateurController.appUser.nom}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="tel" class="col-sm-2 col-form-label">telephone</label>
+					<div class="col-sm-10">
+						<h:inputText id="tel" required="true"
+							value="#{utilisateurController.appUser.tel}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="email" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<h:inputText id="email" required="true"
+							value="#{utilisateurController.appUser.email}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="username" class="col-sm-2 col-form-label">Username</label>
+					<div class="col-sm-10">
+						<h:inputText id="username" required="true"
+							value="#{utilisateurController.appUser.username}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<h:inputText id="password" required="true"
+							value="#{utilisateurController.appUser.password}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label">Roles</label>
+					<div class="col-sm-10">
+						<p:selectOneMenu id="role"
+							value="#{utilisateurController.appUser.roles}"
+							panelStyle="width:180px" effect="fade" var="t"
+							style="width:160px" filter="true" filterMatchMode="startsWith">
+							<f:selectItems value="#{utilisateurController.appUser.roles}"
+								var="role" itemLabel="#{roles.role}" itemValue="#{role}" />
+
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+
+				<div class="row text-center" style="width: 100%; margin: auto">
+					<h:commandButton action="#{utilisateurController.addUser}"
+						value="Save" styleClass="btn btn-primary" style="margin: auto" />
+				</div>
+
+			</h:form>
+
+			<hr />
+
+		</div>
+
+
+		<div class="row text-left" style="width: 100%; margin: auto">
+			<li class="active"><h:link value="Retour"
+					outcome="listUtilisateur" class="btn btn-warning" /></li>
+		</div>
+
+
+
+
+
 
 		<footer id="colorlib-footer" role="contentinfo">
-			<div class="overlay"></div>
-			
-			
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-							All rights reserved | This template is made with <i
-							class="icon-heart" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</small> <small class="block">Demo Images: <a
-							href="http://unsplash.co/" target="_blank">Unsplash</a> , <a
-							href="https://www.pexels.com/" target="_blank">Pexels</a></small>
-					</p>
-				</div>
+		<div class="overlay"></div>
+
+
+		<div class="row copyright">
+			<div class="col-md-12 text-center">
+				<p>
+					<small class="block"> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+						All rights reserved | This template is made with <i
+						class="icon-heart" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</small> <small class="block">Demo Images: <a
+						href="http://unsplash.co/" target="_blank">Unsplash</a> , <a
+						href="https://www.pexels.com/" target="_blank">Pexels</a></small>
+				</p>
 			</div>
+		</div>
 		</footer>
 	</div>
 
@@ -152,28 +229,40 @@
 	</div>
 
 	<!-- jQuery -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.easing.1.3.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/bootstrap.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.waypoints.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.waypoints.min.js"></script>
 	<!-- Stellar Parallax -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.stellar.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.stellar.min.js"></script>
 	<!-- Carousel -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/owl.carousel.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/owl.carousel.min.js"></script>
 	<!-- Flexslider -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.flexslider-min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.flexslider-min.js"></script>
 	<!-- countTo -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.countTo.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.countTo.js"></script>
 	<!-- Magnific Popup -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/magnific-popup-options.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.magnific-popup.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/magnific-popup-options.js"></script>
 	<!-- Sticky Kit -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/sticky-kit.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/sticky-kit.min.js"></script>
 	<!-- Main -->
-	<script src="#{facesContext.externalContext.requestContextPath}/resources/js/main.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/js/main.js"></script>
 
 </h:body>
 </html>
