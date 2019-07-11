@@ -169,20 +169,19 @@
 				<div class="form-group row">
 					<label for="password" class="col-sm-2 col-form-label">Roles</label>
 					<div class="col-sm-10">
-						<p:selectOneMenu id="role"
-							value="#{utilisateurController.appUser.roles}"
-							panelStyle="width:180px" effect="fade" var="t"
-							style="width:160px" filter="true" filterMatchMode="startsWith">
-							<f:selectItems value="#{utilisateurController.appUser.roles}"
-								var="role" itemLabel="#{roles.role}" itemValue="#{role}" />
-
-						</p:selectOneMenu>
+						 
+                        <p:selectCheckboxMenu id="multiple" value="#{utilisateurController.appRoles}" label="Cities" multiple="true"
+                                              filter="true" filterMatchMode="startsWith" autoWidth="false">
+                            <f:selectItems itemLabel="#{utilisateurController.appUser.role.role}"  itemValue="#{utilisateurController.appUser.role}"/>
+                            <f:selectItems value="#{utilisateurController.appRoles}" itemLabel="#{r.role}" itemValue="#{r}"/>
+                        </p:selectCheckboxMenu>
+						
 					</div>
 				</div>
 
 
 				<div class="row text-center" style="width: 100%; margin: auto">
-					<h:commandButton action="#{utilisateurController.addUser}"
+					<h:commandButton action="#{utilisateurController.save}"
 						value="Save" styleClass="btn btn-primary" style="margin: auto" />
 				</div>
 

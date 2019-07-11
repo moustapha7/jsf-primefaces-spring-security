@@ -1,12 +1,16 @@
 package com.codenotfound.controller;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.codenotfound.domaine.AppRole;
@@ -39,6 +43,8 @@ public class ConsultationController implements Serializable {
 	
 	private Consultation consultation;
 	
+	private StreamedContent file;
+	
 	private String message ;
 	
 	private List<Consultation> consultations;
@@ -50,11 +56,83 @@ public class ConsultationController implements Serializable {
 	private List<Medecin> medecins;
 	
 	
+	private Integer selectedMedecin ;
+    private Integer selectedPatient;
+    private Integer selectedOrdonnance ;
+    
+    private List<Medecin> selectedMedecins;
+    
+    private List<Consultation> selectedConsultations;
+	
+	private List<Ordonnance> selectedOrdonnances;
+	
+	private List<Patient> selectedPatients;
+	
+	
 	/*******getter  setter ********************/
 	
 
+	
+	
+	
 	public Consultation getConsultation() {
 		return consultation;
+	}
+
+	public Integer getSelectedMedecin() {
+		return selectedMedecin;
+	}
+
+	public void setSelectedMedecin(Integer selectedMedecin) {
+		this.selectedMedecin = selectedMedecin;
+	}
+
+	public Integer getSelectedPatient() {
+		return selectedPatient;
+	}
+
+	public void setSelectedPatient(Integer selectedPatient) {
+		this.selectedPatient = selectedPatient;
+	}
+
+	public Integer getSelectedOrdonnance() {
+		return selectedOrdonnance;
+	}
+
+	public void setSelectedOrdonnance(Integer selectedOrdonnance) {
+		this.selectedOrdonnance = selectedOrdonnance;
+	}
+
+	public List<Medecin> getSelectedMedecins() {
+		return selectedMedecins;
+	}
+
+	public void setSelectedMedecins(List<Medecin> selectedMedecins) {
+		this.selectedMedecins = selectedMedecins;
+	}
+
+	public List<Consultation> getSelectedConsultations() {
+		return selectedConsultations;
+	}
+
+	public void setSelectedConsultations(List<Consultation> selectedConsultations) {
+		this.selectedConsultations = selectedConsultations;
+	}
+
+	public List<Ordonnance> getSelectedOrdonnances() {
+		return selectedOrdonnances;
+	}
+
+	public void setSelectedOrdonnances(List<Ordonnance> selectedOrdonnances) {
+		this.selectedOrdonnances = selectedOrdonnances;
+	}
+
+	public List<Patient> getSelectedPatients() {
+		return selectedPatients;
+	}
+
+	public void setSelectedPatients(List<Patient> selectedPatients) {
+		this.selectedPatients = selectedPatients;
 	}
 
 	public void setConsultation(Consultation consultation) {
@@ -116,8 +194,20 @@ public class ConsultationController implements Serializable {
 	
 	
 	public ConsultationController() {
+		
+		this.consultation = new Consultation();
+        this.consultation.setOrdonnance(new Ordonnance());
+        this.consultation.setMedecin(new Medecin());
+        this.consultation.setPatient(new Patient());
+      
+		
+		InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/dossierMedical/ficheMedical.jpg");
+        file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_ficheMedical.jpg");
 	
 	}
+	
+	
+	
 	
 	@PostConstruct
 	private void initConsultation() {
@@ -190,23 +280,41 @@ public class ConsultationController implements Serializable {
 	    }
 	    
 	    
-	    public String addConsultation() {
+	    
+	    
+	    public void addConsultation() {
 	        try {
-	           Patient pa = patientRepository.findById(consultation.getPatient().getId());
-	           Medecin me = medecinRepository.findById(consultation.getMedecin().getId());
-	           Ordonnance or = ordonnanceRepository.findById(consultation.getOrdonnance().getId());
+	        	Patient pa= new Patient();
+	        	Medecin me = new Medecin ();
+	        	Ordonnance or =new Ordonnance();
+	            pa = patientRepository.findById(selectedPatient);
+	            me = medecinRepository.findById(selectedMedecin);
+	            or = ordonnanceRepository.findById(selectedOrdonnance);
+	            
+	            if(pa!=null)
+	            {
+	            	consultation.setPatient(pa);
+	            }
+	            if(me!=null)
+	            {
+	            	consultation.setMedecin(me);
+	            }
+	            if(or!=null)
+	            {
+	            	consultation.setOrdonnance(or);
+	            }
 	           
 	           consultationRepository.save( consultation);
 	            
 	     
 	            System.out.println("Success!!!");
 	            consultation =new  Consultation();
-	            return " consultation?faces-redirect=true";
+	           // return " consultation?faces-redirect=true";
 	        }
 	        catch (Exception e){
 	            e.printStackTrace();
 	        }
-	        return " consultation?error=1&faces-redirect=true";
+	     //   return " consultation?error=1&faces-redirect=true";
 	    }
 	    
 	    
@@ -217,16 +325,14 @@ public class ConsultationController implements Serializable {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/*********************************CRUD***************************************************/
+	    
+	  
+	   
+	 
+	    public StreamedContent getFile() {
+	        return file;
+	    }
 	
 	
 

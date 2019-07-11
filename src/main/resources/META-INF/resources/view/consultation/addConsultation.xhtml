@@ -113,18 +113,26 @@
 				<div class="form-group row">
 					<label for="patient" class="col-sm-2 col-form-label">Patients</label>
 					<div class="col-sm-10">
-						<h:inputText id="patient" required="true"
-							value="#{consultationController.consultation.numero}"
-							styleClass="form-control" />
+						
+						 <h:selectOneMenu id="patient" value="#{consultationController.selectedPatient}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="-------Patients --------"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.patients}" var="p" itemLabel="#{p.prenom} #{p.nom}" itemValue="#{p.id}"/>
+                        </h:selectOneMenu>
+						
 					</div>
 				</div>
 				
 				<div class="form-group row">
 					<label for="medecin" class="col-sm-2 col-form-label">Medecin</label>
 					<div class="col-sm-10">
-						<h:inputText id="medecin" required="true"
-							value="#{consultationController.consultation.numero}"
-							styleClass="form-control" />
+						
+						<h:selectOneMenu id="medecin" value="#{consultationController.selectedMedecin}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="-------Medecins --------"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.medecins}" var="m" itemLabel="#{m.prenom} #{m.nom}" itemValue="#{m.id}"/>
+                        </h:selectOneMenu>
+						
 					</div>
 				</div>
 				
@@ -153,19 +161,21 @@
 							value="#{consultationController.consultation.date}"
 							styleClass="form-control" />
 					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label for="medicament" class="col-sm-2 col-form-label">Medicament 1</label>
-					<div class="col-sm-10">
-						<p:selectOneMenu id="consultation" value="#{consultationController.ordonnances}">
-				            <f:selectItem itemLabel="Select One"  />
-				            <f:selectItems var="consultation" value="#{consultationController.ordonnances}"  itemValue="#{ordonnance.nom}" />
-				        </p:selectOneMenu>
- 
- 
+				</div>		
+			   
+				<div class="form-group row"  >
+					<label for="medicament" class="col-sm-2 col-form-label">Medicament </label>
+					<div class="col-sm-10">                        
+                        <h:selectOneMenu id="ordonnance" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="-------Medicaments --------"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
+                        </h:selectOneMenu>
+                     
 					</div>
 				</div>
+				
+				
 
 
 				<div class="row text-center" style="width: 100%; margin: auto">
@@ -179,11 +189,6 @@
 
 		</div>
 			
-
-		
-		
-		
-		
 		<div class="row text-left" style="width: 100%; margin: auto">
 			<li class="active"><h:link value="Retour"
 					outcome="listConsultation" class="btn btn-warning" /></li>

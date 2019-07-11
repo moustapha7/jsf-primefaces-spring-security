@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
@@ -86,6 +87,7 @@
 										</p>
 									</div>
 								</div>
+								 
 							</div>
 						</div>
 					</div>
@@ -99,12 +101,19 @@
 								<ul>
 									
 									<li class="active"><h:link value="Accueil" outcome="/index" /></li >
-									<li class="active"><h:link value="Utilisateur" outcome="/view/utilisateur/listUtilisateur"/></li >
-									<li class="active"><h:link value="Medecin" outcome="/view/medecin/listMedecin"/></li >
-									<li class="active"><h:link value="Patient" outcome="/view/patient/listPatient"/></li >
-									<li class="active"><h:link value="Ordonnance" outcome="/view/ordonnance/listOrdonnance"/></li >
-									<li class="active"><h:link value="Consultation" outcome="listConsultation"/></li >
-									<li class="has-dropdown">
+									
+									<c:if test="#{utilisateurController.haveRoless('ADMIN')==true}"  >
+										<li class="active"><h:link value="Utilisateur" outcome="/view/utilisateur/listUtilisateur"/></li >
+									</c:if>
+									
+									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"   >
+										<li class="active"><h:link value="Medecin" outcome="/view/medecin/listMedecin"/></li >
+										<li class="active"><h:link value="Patient" outcome="/view/patient/listPatient"/></li >
+										<li class="active"><h:link value="Ordonnance" outcome="/view/ordonnance/listOrdonnance"/></li >
+										<li class="active"><h:link value="Consultation" outcome="listConsultation"/></li >
+									</c:if>
+										
+										<li class="has-dropdown">
 											<a >Compte</a>
 											<ul class="dropdown">
 												<li>

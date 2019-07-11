@@ -5,6 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:sec="http://www.springframework.org/security/tags"
+	 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
@@ -75,6 +76,8 @@
 									</div>
 								</div>
 								
+								
+								
 								<div class="col-md-3">
 									<div class="loc">
 										<span class="icon"><i class="icon-location"></i></span>
@@ -98,11 +101,20 @@
 								<ul>
 									
 									<li class="active"><h:link value="Accueil" outcome="index" /></li >
-									<li class="active"><h:link value="Utilisateur" outcome="view/utilisateur/listUtilisateur"/></li >
-									<li class="active"><h:link value="Medecin" outcome="view/medecin/listMedecin" /></li >
-									<li class="active"><h:link value="Patient" outcome="view/patient/listPatient"/></li >
-									<li class="active"><h:link value="Ordonnance" outcome="view/ordonnance/listOrdonnance"/></li >
-									<li class="active"><h:link value="Consultation" outcome="view/consultation/listConsultation"/></li >
+									
+									<c:if test="#{utilisateurController.haveRoless('ADMIN')==true}"  >
+										<li class="active"><h:link value="Utilisateur" outcome="view/utilisateur/listUtilisateur"/></li >
+									</c:if>
+									
+									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"  >
+										<li class="active"><h:link value="Medecin" outcome="view/medecin/listMedecin" /></li >
+									
+										
+										<li class="active"><h:link value="Patient" outcome="view/patient/listPatient"/></li >
+										<li class="active"><h:link value="Medicaments" outcome="view/ordonnance/listOrdonnance"/></li >
+										
+										<li class="active"><h:link value="Consultation" outcome="view/consultation/listConsultation"/></li >
+									</c:if>
 									<li class="has-dropdown">
 											<a >Compte</a>
 											<ul class="dropdown">
