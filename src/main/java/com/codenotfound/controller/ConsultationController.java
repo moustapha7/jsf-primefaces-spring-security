@@ -1,13 +1,19 @@
 package com.codenotfound.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -282,7 +288,7 @@ public class ConsultationController implements Serializable {
 	    
 	    
 	    
-	    public void addConsultation() {
+	    public String addConsultation() {
 	        try {
 	        	Patient pa= new Patient();
 	        	Medecin me = new Medecin ();
@@ -304,7 +310,8 @@ public class ConsultationController implements Serializable {
 	            	consultation.setOrdonnance(or);
 	            }
 	           
-	           consultationRepository.save( consultation);
+	            
+	            consultation = consultationRepository.save( consultation);
 	            
 	     
 	            System.out.println("Success!!!");
@@ -314,7 +321,7 @@ public class ConsultationController implements Serializable {
 	        catch (Exception e){
 	            e.printStackTrace();
 	        }
-	     //   return " consultation?error=1&faces-redirect=true";
+	        return " consultation?error=1&faces-redirect=true";
 	    }
 	    
 	    
@@ -333,7 +340,57 @@ public class ConsultationController implements Serializable {
 	    public StreamedContent getFile() {
 	        return file;
 	    }
-	
+	    
+	    
+	    
+	    private static final long serialVersionUID = 1L;
+	    
+	    /**
+	     * Download file.
+	     *//*
+	    public void downloadFile() throws IOException
+	    {
+	       File file = new File("C:\\docs\\instructions.txt");
+	       InputStream fis = new FileInputStream(file);
+	       byte[] buf = new byte[1024];
+	       int offset = 0;
+	       int numRead = 0;
+	       while ((offset < buf.length) && ((numRead = fis.read(buf, offset, buf.length - offset)) >= 0)) 
+	       {
+	         offset += numRead;
+	       }
+	       fis.close();
+	       HttpServletResponse response =
+	          (HttpServletResponse) FacesContext.getCurrentInstance()
+	              .getExternalContext().getResponse();
+	      
+	      response.setContentType("application/octet-stream");
+	      response.setHeader("Content-Disposition", "attachment;filename=instructions.txt");
+	      response.getOutputStream().write(buf);
+	      response.getOutputStream().flush();
+	      response.getOutputStream().close();
+	      FacesContext.getCurrentInstance().responseComplete();
+	    }*/
+	    
+	    private DefaultStreamedContent download;
+
+	    public void setDownload(DefaultStreamedContent download) {
+	        this.download = download;
+	    }
+
+	    public DefaultStreamedContent getDownload() throws Exception {
+	        System.out.println("GET = " + download.getName());
+	        return download;
+	    }
+
+	    public void prepDownload() throws Exception {
+	        File file = new File("F:\\dossierMedical.pdf");
+	        InputStream input = new FileInputStream(file);
+	        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	        setDownload(new DefaultStreamedContent(input, externalContext.getMimeType(file.getName()), file.getName()));
+	        System.out.println("PREP = " + download.getName());
+	    }
+	  
 	
 
 }

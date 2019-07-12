@@ -105,7 +105,7 @@
 										<li class="active"><h:link value="Utilisateur" outcome="/view/utilisateur/listUtilisateur"/></li >
 									</c:if>
 									
-									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"  >
+									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true or utilisateurController.haveRoless('USER')==true}"  >
 										<li class="active"><h:link value="Medecin" outcome="/view/medecin/listMedecin"/></li >
 										<li class="active"><h:link value="Patient" outcome="/view/patient/listPatient"/></li >
 										<li class="active"><h:link value="Ordonnance" outcome="listOrdonnance"/></li >

@@ -121,7 +121,7 @@
 											outcome="/view/utilisateur/listUtilisateur" /></li>
 									</c:if>
 									
-									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"  >		
+									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true or utilisateurController.haveRoless('USER')==true}"  >	
 										<li class="active"><h:link value="Medecin"
 												outcome="/view/medecin/listMedecin" /></li>
 										<li class="active"><h:link value="Patient"
@@ -195,10 +195,13 @@
 						<h:commandButton style="margin: 5px"
 							styleClass="btn btn-success btn-sm"
 							action="#{patientController.editPatient(patient)}" value="Editer" />
-						<h:commandButton style="margin: 5px"
-							styleClass="btn btn-danger btn-sm"
-							action="#{patientController.deletePatient(patient)}"
-							value="Supprimer" />
+							
+						<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"   >		
+							<h:commandButton style="margin: 5px"
+								styleClass="btn btn-danger btn-sm"
+								action="#{patientController.deletePatient(patient)}"
+								value="Supprimer" />
+						</c:if>	
 					</h:form>
 				</h:column>
 			</h:dataTable>

@@ -107,7 +107,7 @@
 										<li class="active"><h:link value="Utilisateur" outcome="listUtilisateur"/></li >
 									</c:if>
 									
-									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true}"  >
+									<c:if test="#{utilisateurController.haveRoless('MEDECIN')==true or utilisateurController.haveRoless('USER')==true}"  >
 										<li class="active"><h:link value="Medecin" outcome="view/medecin/listMedecin" /></li >
 									
 										
@@ -122,7 +122,7 @@
 												<li>
 													<h:form onsubmit="this.action='#{request.contextPath}/logout';"
 													    class="logout-form">
-													    <p:commandLink value="Deconnexion" ajax="true" />
+													    <p:commandLink value="Deconnexion" ajax="false" />
 													  </h:form>  
 												</li>
 											</ul>									
