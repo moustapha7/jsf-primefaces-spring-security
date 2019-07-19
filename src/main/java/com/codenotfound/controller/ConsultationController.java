@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,6 +17,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -61,6 +63,12 @@ public class ConsultationController implements Serializable {
 	
 	private List<Medecin> medecins;
 	
+	private Patient patient;
+	
+	private Medecin medecin;
+	
+	private Ordonnance ordonnance;
+	
 	
 	private Integer selectedMedecin ;
     private Integer selectedPatient;
@@ -75,14 +83,40 @@ public class ConsultationController implements Serializable {
 	private List<Patient> selectedPatients;
 	
 	
+	private LazyDataModel<Consultation> lazyModel;
+	
+	
+	
+	
+	@PostConstruct
+	private void initConsultation() {
+		
+		consultation= new Consultation();
+		consultation.setMedecin(new Medecin());
+		consultation.setPatient(new Patient());
+		consultation.setOrdonnance(new Ordonnance());
+		// lazyModel = new LazyDataModel<Consultation>(consultationRepository.findAll());
+		getConsultations();
+		getPatients();
+		getOrdonnances();
+	}
+	
 	/*******getter  setter ********************/
 	
-
+	
 	
 	
 	
 	public Consultation getConsultation() {
 		return consultation;
+	}
+
+	public LazyDataModel<Consultation> getLazyModel() {
+		return lazyModel;
+	}
+
+	public void setLazyModel(LazyDataModel<Consultation> lazyModel) {
+		this.lazyModel = lazyModel;
 	}
 
 	public Integer getSelectedMedecin() {
@@ -170,8 +204,8 @@ public class ConsultationController implements Serializable {
 	
 	
 	public List<Ordonnance> getOrdonnances() {
-		ordonnances= ordonnanceRepository.findAll();
-		return ordonnances;
+		return ordonnances= ordonnanceRepository.findAll();
+		
 	}
 
 	public void setOrdonnances(List<Ordonnance> ordonnances) {
@@ -179,8 +213,8 @@ public class ConsultationController implements Serializable {
 	}
 
 	public List<Patient> getPatients() {
-		patients= patientRepository.findAll();
-		return patients;
+		return patients= patientRepository.findAll();
+		
 	}
 
 	public void setPatients(List<Patient> patients) {
@@ -188,8 +222,8 @@ public class ConsultationController implements Serializable {
 	}
 
 	public List<Medecin> getMedecins() {
-		medecins= medecinRepository.findAll();
-		return medecins;
+		return medecins= medecinRepository.findAll();
+		
 	}
 
 	public void setMedecins(List<Medecin> medecins) {
@@ -202,7 +236,7 @@ public class ConsultationController implements Serializable {
 	public ConsultationController() {
 		
 		this.consultation = new Consultation();
-        this.consultation.setOrdonnance(new Ordonnance());
+       this.consultation.setOrdonnance(new Ordonnance());
         this.consultation.setMedecin(new Medecin());
         this.consultation.setPatient(new Patient());
       
@@ -215,20 +249,7 @@ public class ConsultationController implements Serializable {
 	
 	
 	
-	@PostConstruct
-	private void initConsultation() {
-		
-		consultation= new Consultation();
-		consultation.setMedecin(new Medecin());
-		consultation.setPatient(new Patient());
-		consultation.setOrdonnance(new Ordonnance());
-		consultation.setOrdonnance2(new Ordonnance());
-		consultation.setOrdonnance3(new Ordonnance());
-		consultation.setOrdonnance4(new Ordonnance());
-		getConsultations();
-		getPatients();
-		getOrdonnances();
-	}
+	
 	
 	
 	
@@ -288,40 +309,55 @@ public class ConsultationController implements Serializable {
 	    
 	    
 	    
-	    public String addConsultation() {
+	    public void addConsultation() {
 	        try {
+	        Consultation	consultation1 =new  Consultation();
 	        	Patient pa= new Patient();
 	        	Medecin me = new Medecin ();
 	        	Ordonnance or =new Ordonnance();
-	            pa = patientRepository.findById(selectedPatient);
-	            me = medecinRepository.findById(selectedMedecin);
-	            or = ordonnanceRepository.findById(selectedOrdonnance);
+	        	
+	        	 pa = (Patient) patientRepository.findById(selectedPatient).get();
+	            me = medecinRepository.findById(selectedMedecin).get();
+	            or = ordonnanceRepository.findById(selectedOrdonnance).get();
+	        
 	            
 	            if(pa!=null)
 	            {
-	            	consultation.setPatient(pa);
+	            	consultation1.setPatient(pa);
 	            }
 	            if(me!=null)
 	            {
-	            	consultation.setMedecin(me);
+	            	consultation1.setMedecin(me);
 	            }
 	            if(or!=null)
 	            {
-	            	consultation.setOrdonnance(or);
+	            	consultation1.setOrdonnance(or);
 	            }
 	           
-	            
-	            consultation = consultationRepository.save( consultation);
-	            
+	            consultation1.setDate(consultation.getDate().toString());
+	            consultation1.setDetails(consultation.getDetails().toString());
+	            consultation1.setNom(consultation.getNom().toString());
+	            consultation1.setNumero(consultation.getNumero().toString());
+	            consultation1.setAutreMedicament( consultation.getAutreMedicament().toString());
+	            consultation1=consultationRepository.save( consultation1);
+	            if(consultation1 != null){
+	                FacesMessage msg = new FacesMessage("Successful", "consultation ajoute avec succes");
+	                FacesContext.getCurrentInstance().addMessage(null, msg);
+	              //  this.user = new AppUser();
+	            }else{
+	                FacesMessage msg1 = new FacesMessage("Successful", "Erreur insertion :");
+	                FacesContext.getCurrentInstance().addMessage(null, msg1);
+	             //   this.user = new AppUser();
+	            }
 	     
 	            System.out.println("Success!!!");
-	            consultation =new  Consultation();
+	            
 	           // return " consultation?faces-redirect=true";
 	        }
 	        catch (Exception e){
 	            e.printStackTrace();
 	        }
-	        return " consultation?error=1&faces-redirect=true";
+	      //  return " consultation?error=1&faces-redirect=true";
 	    }
 	    
 	    

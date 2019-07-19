@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Keur Massar Hostpital</title>
@@ -90,37 +91,111 @@
 					</div>
 				</div>
 			</div>
-			<div class="menu-wrap">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-8">
-							<div class="menu-1">
-								<ul>
-									<li class="active"><a href="index.html">Accueil</a></li>
-									<li class="active"><a href="index.html">Utilisateurs</a></li>
-									<li class="active"><a href="index.html">Medecin</a></li>
-									<li class="active"><a href="index.html">Patient</a></li>
-									<li class="active"><a href="index.html">Ordonnance</a></li>
-									<li class="active"><a href="index.html">Consultation</a></li>
-									
-									<li class="has-dropdown"><a href="departments.html">Compte</a>
-										<ul class="dropdown">
-											<li><a href="departments-single.html">Modifier mot de passe
-													Surgery Department</a></li>
-											<li><a href="departments-single.html">Deconnexion
-													Department</a></li>
-											
-										</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
+			
+		</div>
+		</nav>
+		
+		
+		<h2 class="h3 text-left"> Edit Dossier Medical</h2>
+		<div class="container">
+
+
+			<h:form styleClass="form">
+				<div class="form-group row">
+					<label for="prenom" class="col-sm-2 col-form-label">Numero Dossier</label>
+					<div class="col-sm-10">
+						<h:inputText id="numero" required="true"
+							value="#{consultationController.consultation.numero}"
+							styleClass="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="patient" class="col-sm-2 col-form-label">Patients</label>
+					<div class="col-sm-10">
+						
+						 <h:selectOneMenu id="patient_id" value="#{consultationController.selectedPatient}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="-------Patients --------"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.patients}" var="p" itemLabel="#{p.prenom} #{p.nom}" itemValue="#{p.id}"/>
+                        </h:selectOneMenu>
 						
 					</div>
 				</div>
-			</div>
+				
+				<div class="form-group row">
+					<label for="medecin" class="col-sm-2 col-form-label">Medecin</label>
+					<div class="col-sm-10">
+						
+						<h:selectOneMenu id="medecin_id" value="#{consultationController.selectedMedecin}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="-------Medecins --------"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.medecins}" var="m" itemLabel="#{m.prenom} #{m.nom}" itemValue="#{m.id}"/>
+                        </h:selectOneMenu>
+						
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="nom" class="col-sm-2 col-form-label">Nom Maladie</label>
+					<div class="col-sm-10">
+						<h:inputText id="nom" required="true"
+							value="#{consultationController.consultation.nom}"
+							styleClass="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="details" class="col-sm-2 col-form-label">Details</label>
+					<div class="col-sm-10">
+						<h:inputTextarea id="details" required="true"
+							value="#{consultationController.consultation.details}"
+							styleClass="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="nom" class="col-sm-2 col-form-label">Date</label>
+					<div class="col-sm-10">
+						<h:inputText type="date" id="date" required="true"
+							value="#{consultationController.consultation.date}"
+							styleClass="form-control" />
+					</div>
+				</div>		
+			   
+				<div class="form-group row"  >
+					<label for="medicament" class="col-sm-2 col-form-label">Medicament 1 </label>
+					<div class="col-sm-10">                        
+                        <h:selectOneMenu id="ordonnance_id" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
+                                         converter="omnifaces.SelectItemsConverter" class="form-control">
+                            <f:selectItem itemLabel="Selectionnez un Medicament"  itemValue="null"/>
+                            <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
+                        </h:selectOneMenu>
+                     
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="prenom" class="col-sm-2 col-form-label">Autres Medicaments</label>
+					<div class="col-sm-10">
+						<h:inputText id="autreMedicament" required="true"
+							value="#{consultationController.consultation.autreMedicament}"
+							styleClass="form-control" />
+					</div>
+				</div>
+				
+				
+				
+				<div class="row text-center" style="width: 100%; margin: auto">
+					<h:commandButton action="#{consultationController.updateConsultation}"
+						value="Save" styleClass="btn btn-primary" style="margin: auto" />
+				</div>
+
+			</h:form>
+
+			<hr />
+
 		</div>
-		</nav>
 
 		
 		

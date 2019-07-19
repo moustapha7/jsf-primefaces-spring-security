@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="Ordonnance")
@@ -16,12 +17,18 @@ public class Ordonnance {
 	private String nom;
 	private int prix;
 	
+	/*@OneToMany
+	private List<Consultation> consultations;
+	*/
 	@OneToMany(mappedBy="ordonnance")  
 	private List<Consultation> consultation;
-
+	
 	public Ordonnance() {
-		super();
+		
 	}
+
+
+	
 
 	public Ordonnance(int id, String nom, int prix, List<Consultation> consultation) {
 		super();
@@ -62,6 +69,7 @@ public class Ordonnance {
 	public void setConsultation(List<Consultation> consultation) {
 		this.consultation = consultation;
 	}
+	
 	
 
 }

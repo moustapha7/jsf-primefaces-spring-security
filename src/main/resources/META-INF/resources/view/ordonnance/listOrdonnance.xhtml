@@ -101,7 +101,7 @@
 									
 									<li class="active"><h:link value="Accueil" outcome="/index" /></li >
 									
-									<c:if test="#{utilisateurController.haveRoless('ADMIN')==true}"  >
+									<c:if test="#{utilisateurController.haveRoless('ADMIN')==true or utilisateurController.haveRoless('MEDECIN')==true or utilisateurController.haveRoless('USER')==true}">
 										<li class="active"><h:link value="Utilisateur" outcome="/view/utilisateur/listUtilisateur"/></li >
 									</c:if>
 									
@@ -114,6 +114,7 @@
 									<li class="has-dropdown">
 											<a >Compte</a>
 											<ul class="dropdown">
+											<li class="active"><h:link value="Update Password" outcome="/view/utilisateur/modifierPasswordUser"/></li >
 												<li>
 													<h:form onsubmit="this.action='#{request.contextPath}/logout';"
 													    class="logout-form">

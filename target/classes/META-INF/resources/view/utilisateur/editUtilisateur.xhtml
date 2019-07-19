@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -90,44 +91,97 @@
 					</div>
 				</div>
 			</div>
-			<div class="menu-wrap">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-8">
-							<div class="menu-1">
-								<ul>
-									<li class="active"><a href="index.html">Accueil</a></li>
-									<li class="active"><a href="index.html">Utilisateurs</a></li>
-									<li class="active"><a href="index.html">Medecin</a></li>
-									<li class="active"><a href="index.html">Patient</a></li>
-									<li class="active"><a href="index.html">Ordonnance</a></li>
-									<li class="active"><a href="index.html">Consultation</a></li>
-									
-									<li class="has-dropdown"><a href="departments.html">Compte</a>
-										<ul class="dropdown">
-											<li><a href="departments-single.html">Modifier mot de passe
-													Surgery Department</a></li>
-											<li><a href="departments-single.html">Deconnexion
-													Department</a></li>
-											
-										</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		</nav>
 
-		<aside id="colorlib-hero">
-		<div class="flexslider">
-			
-		</div>
-		</aside>
+		
+		
+		<h2 class="h3 text-left">Ajout Utilisateur</h2>
+		<div class="container">
 
+
+			<h:form styleClass="form">
+				<div class="form-group row">
+					<label for="prenom" class="col-sm-2 col-form-label">Prenom</label>
+					<div class="col-sm-10">
+						<h:inputText id="prenom" required="true"
+							value="#{utilisateurController.appUser.prenom}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nom" class="col-sm-2 col-form-label">Nom</label>
+					<div class="col-sm-10">
+						<h:inputText id="nom" required="true"
+							value="#{utilisateurController.appUser.nom}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="tel" class="col-sm-2 col-form-label">telephone</label>
+					<div class="col-sm-10">
+						<h:inputText id="tel" required="true"
+							value="#{utilisateurController.appUser.tel}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="email" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<h:inputText id="email" required="true"
+							value="#{utilisateurController.appUser.email}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="username" class="col-sm-2 col-form-label">Username</label>
+					<div class="col-sm-10">
+						<h:inputText id="username" required="true"
+							value="#{utilisateurController.appUser.username}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<h:inputText id="password" required="true"
+							value="#{utilisateurController.appUser.password}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label">Roles</label>
+					<div class="col-sm-10">
+						 
+                        <p:selectCheckboxMenu id="multiple" value="#{utilisateurController.appRoles}" label="Cities" multiple="true"
+                                              filter="true" filterMatchMode="startsWith" autoWidth="false">
+                            <f:selectItems itemLabel="#{utilisateurController.appUser.role.role}"  itemValue="#{utilisateurController.appUser.role}"/>
+                            <f:selectItems value="#{utilisateurController.appRoles}" itemLabel="#{r.role}" itemValue="#{r}"/>
+                        </p:selectCheckboxMenu>
+						
+					</div>
+				</div>
+
+
+				<div class="row text-center" style="width: 100%; margin: auto">
+					<h:commandButton action="#{utilisateurController.updateUser}"
+						value="Save" styleClass="btn btn-primary" style="margin: auto" />
+				</div>
+
+			</h:form>
+
+			<hr />
+
+		</div>
+		
+		
 		
 		<div class="row text-left" style="width: 100%; margin: auto">
 			<li class="active"><h:link value="Retour"

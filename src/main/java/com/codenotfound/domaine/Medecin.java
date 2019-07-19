@@ -75,5 +75,6 @@ public class Medecin {
 		this.consultation = consultation;
 	}
 
+	
 
 }

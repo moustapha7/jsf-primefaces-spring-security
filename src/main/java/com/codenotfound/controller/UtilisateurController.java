@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,6 +172,18 @@ public class UtilisateurController implements Serializable {
         return "editUtilisateur?faces-redirect=true";
     }
 	
+	public String editPassword(AppUser appUser){
+        try {
+            this.appUser = appUser ;
+        
+            return "modifierPasswordUser?faces-redirect=true";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "modifierPasswordUser?faces-redirect=true";
+    }
+	
+	
 	
    /* public String detailsLocation(Location location){
         try {
@@ -184,6 +197,25 @@ public class UtilisateurController implements Serializable {
 
     public String updateUser(){
         try {
+        	String hpws = passwordEncoder.encode(appUser.getPassword()) ;
+            appUser.setPassword(hpws);
+
+            userRepository.save(appUser);
+            appUser = new AppUser();
+            return "appUser?faces-redirect=true";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "appUser?faces-redirect=true";
+    }
+    
+    
+    
+    public String updatePasswordUser(){
+        try {
+        	String hpws = passwordEncoder.encode(appUser.getPassword()) ;
+            appUser.setPassword(hpws);
+
             userRepository.save(appUser);
             appUser = new AppUser();
             return "appUser?faces-redirect=true";
@@ -278,7 +310,15 @@ public class UtilisateurController implements Serializable {
         }
         return false ;
     }
+    
+    
+    public boolean isAuthenticated(){
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
+
+    }
+  
 	
 	
 	
@@ -287,20 +327,6 @@ public class UtilisateurController implements Serializable {
 	
 	
 	/*********************************************************************************************/
-	
-	public boolean isMedecin()
-	{
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 if (auth!=null)
-		 {
-			if( auth.getAuthorities().contains("MEDECIN"))
-			{
-				return true;
-			}
-		 }
-		return false;
-		
-	}
 	
 	
 	

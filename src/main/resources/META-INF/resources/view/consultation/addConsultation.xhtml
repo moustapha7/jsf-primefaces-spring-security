@@ -114,7 +114,7 @@
 					<label for="patient" class="col-sm-2 col-form-label">Patients</label>
 					<div class="col-sm-10">
 						
-						 <h:selectOneMenu id="patient" value="#{consultationController.selectedPatient}" filter="true" filterMatchMode="contains"
+						 <h:selectOneMenu id="patient_id" value="#{consultationController.selectedPatient}" filter="true" filterMatchMode="contains"
                                          converter="omnifaces.SelectItemsConverter" class="form-control">
                             <f:selectItem itemLabel="-------Patients --------"  itemValue="null"/>
                             <f:selectItems value="#{consultationController.patients}" var="p" itemLabel="#{p.prenom} #{p.nom}" itemValue="#{p.id}"/>
@@ -127,7 +127,7 @@
 					<label for="medecin" class="col-sm-2 col-form-label">Medecin</label>
 					<div class="col-sm-10">
 						
-						<h:selectOneMenu id="medecin" value="#{consultationController.selectedMedecin}" filter="true" filterMatchMode="contains"
+						<h:selectOneMenu id="medecin_id" value="#{consultationController.selectedMedecin}" filter="true" filterMatchMode="contains"
                                          converter="omnifaces.SelectItemsConverter" class="form-control">
                             <f:selectItem itemLabel="-------Medecins --------"  itemValue="null"/>
                             <f:selectItems value="#{consultationController.medecins}" var="m" itemLabel="#{m.prenom} #{m.nom}" itemValue="#{m.id}"/>
@@ -161,58 +161,39 @@
 							value="#{consultationController.consultation.date}"
 							styleClass="form-control" />
 					</div>
-				</div>		
+				</div>	
+				
+				<div class="form-group">
+					<h1>***************  Generation des  Ordonnances   **********************</h1>
+				</div> 	
 			   
 				<div class="form-group row"  >
 					<label for="medicament" class="col-sm-2 col-form-label">Medicament 1 </label>
 					<div class="col-sm-10">                        
                         <h:selectOneMenu id="ordonnance_id" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
                                          converter="omnifaces.SelectItemsConverter" class="form-control">
-                            <f:selectItem itemLabel="-------Medicaments 1 --------"  itemValue="null"/>
+                            <f:selectItem itemLabel="Selectionnez un Medicament"  itemValue="null"/>
                             <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
                         </h:selectOneMenu>
                      
 					</div>
 				</div>
 				
-				<div class="form-group row"  >
-					<label for="medicament" class="col-sm-2 col-form-label">Medicament 2 </label>
-					<div class="col-sm-10">                        
-                        <h:selectOneMenu id="ordonnance2_id" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
-                                         converter="omnifaces.SelectItemsConverter" class="form-control">
-                            <f:selectItem itemLabel="-------Medicaments 2 --------"  itemValue="null"/>
-                            <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
-                        </h:selectOneMenu>
-                     
+				
+				
+				
+				<div class="form-group row">
+					<label for="prenom" class="col-sm-2 col-form-label">Autres Medicaments</label>
+					<div class="col-sm-10">
+						<h:inputText id="autreMedicament" required="true"
+							value="#{consultationController.consultation.autreMedicament}"
+							styleClass="form-control" />
 					</div>
 				</div>
 				
-				<div class="form-group row"  >
-					<label for="medicament" class="col-sm-2 col-form-label">Medicament 3 </label>
-					<div class="col-sm-10">                        
-                        <h:selectOneMenu id="ordonnance3_id" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
-                                         converter="omnifaces.SelectItemsConverter" class="form-control">
-                            <f:selectItem itemLabel="-------Medicaments 3 --------"  itemValue="null"/>
-                            <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
-                        </h:selectOneMenu>
-                     
-					</div>
-				</div>
 				
-				<div class="form-group row"  >
-					<label for="medicament" class="col-sm-2 col-form-label">Medicament 4 </label>
-					<div class="col-sm-10">                        
-                        <h:selectOneMenu id="ordonnance" value="#{consultationController.selectedOrdonnance}" filter="true" filterMatchMode="contains"
-                                         converter="omnifaces.SelectItemsConverter" class="form-control">
-                            <f:selectItem itemLabel="-------Medicaments 1 --------"  itemValue="null"/>
-                            <f:selectItems value="#{consultationController.ordonnances}" var="o" itemLabel="#{o.nom}" itemValue="#{o.id}"/>
-                        </h:selectOneMenu>
-                     
-					</div>
-				</div>
 				
-
-
+				
 				<div class="row text-center" style="width: 100%; margin: auto">
 					<h:commandButton action="#{consultationController.addConsultation}"
 						value="Save" styleClass="btn btn-primary" style="margin: auto" />
